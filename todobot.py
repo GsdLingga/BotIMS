@@ -3,6 +3,7 @@ import requests
 import time
 import urllib
 import config
+from flask import Flask
 from dbhelper import DBHelper
 
 db = DBHelper()
@@ -10,7 +11,9 @@ db = DBHelper()
 TOKEN = '728232290:AAEHkvLys1w0Lyx7vwQ53DXY2cSOT1EJAko'
 URL = "https://api.telegram.org/bot{}/".format(TOKEN)
 
+app = Flask(__name__)
 
+@app.route("/")
 def get_url(url):
     response = requests.get(url)
     content = response.content.decode("utf8")
@@ -96,4 +99,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    app.run()
